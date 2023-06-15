@@ -19,12 +19,13 @@ jobs:
       # имя выводится на Github при просмотре сборки
       - name: run tests
         run: npm test # name и run относятся к одной задаче, поэтому дефис ставится только перед name
-      - uses: actions/checkout@master
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/node@master
-        env:
-          SNYK_TOKEN: 'cad81c41-c805-40b0-81ca-3cca8830f635'
       - uses: actions/setup-node@v3
         with: 
           node-version: 14
           cache: 'npm'
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
